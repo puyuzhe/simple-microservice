@@ -3,7 +3,7 @@ $(function () {
     var table = layui.table;
     table.render({
       elem: '#productList'
-      , url: 'http://gateway.ctnrs.com/product/queryAllProduct'
+      , url: 'http://localhost:9999/product/queryAllProduct'
       , cellMinWidth: 80
       , page: true
       , id: 'productListReload'
@@ -35,7 +35,7 @@ $(function () {
           //layer.msg('正在下单', {icon: 1});
           $.ajax({
             type: "POST",
-            url: "http://gateway.ctnrs.com/order/submitOrder",
+            url: "http://localhost:9999/order/submitOrder",
             data: {productId: data.id, orderProductName: data.productName,orderPrice:data.price,count:1},
             dataType: "json",
             beforeSend:function(XMLHttpRequest){

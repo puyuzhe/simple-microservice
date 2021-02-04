@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    app: mypod
+spec:
+  containers:
+    - name: mypod
+      image: nginx:1.14
+      #每次创建实时拉取镜像
+      imagePullPolicy: Always
+      #如果存在就不主动拉取镜像
+      #imagePullPolicy: IfNotPresent
+      #永远不会主动拉取镜像
+      #imagePullPolicy: Never
+  restartPolicy: Always

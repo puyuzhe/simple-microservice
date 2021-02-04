@@ -1,0 +1,31 @@
+#节点亲和性影响Pod调度
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    app: mypod
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: env_role
+                operator: In
+                values:
+                  - dev
+                  - test
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+              - key: group
+                operator: In
+                values:
+                  - other
+                  - prod
+          weight: 1
+  containers:
+    - name: mypod
+      image: nginx:1.14
+  restartPolicy: Always

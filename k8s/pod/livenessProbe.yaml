@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-exec
+  labels:
+    test: liveness-exec
+spec:
+  containers:
+    - name: liveness-exec
+      image: nginx
+      imagePullPolicy: IfNotPresent
+      args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy
+      #livenessProbe 标签为存活检查标签, 如果检查失败, 将直接杀死容器,根据restartPolicy标签的来决定如何重启容器
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /temp/healthy
+        #用来表示初始化延迟的时间，也就是告诉监测从多久之后开始运行，单位是秒
+        initialDelaySeconds: 10
+        #规定kubelet要每隔指定的秒执行一次liveness probe
+        periodSeconds: 10
+      #readinessProbe 标签为就绪检查, 如果失败 K8s将会把Pod从 service endpoints中剔除
+      readinessProbe:
+        exec:
+          command:
+            - cat
+            - /temp/healthy
+  restartPolicy: Always

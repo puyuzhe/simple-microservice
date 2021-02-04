@@ -12,10 +12,6 @@
     </div>
     <!-- 获取数据的表格 -->
     <table id="orderList" lay-filter="order-filter"></table>
-    <!-- 底部固定区域 -->
-    <div class="layui-footer">
-        &nbsp;&nbsp;&nbsp;容器学院 www.ctnrs.com
-    </div>
 </div>
 
 <!-- 操作列的标签-->
