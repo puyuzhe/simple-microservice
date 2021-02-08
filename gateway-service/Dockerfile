@@ -4,5 +4,4 @@ MAINTAINER pyz
 
 COPY target/gateway-service.jar ./
 
-CMD java -jar gateway-service.jar
-
+CMD java -jar gateway-service.jar --spring.profiles.active=fat
